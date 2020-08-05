@@ -1,4 +1,4 @@
-// CHANGE THE DYNAMIC CREATION OF ELEMENTS TO HTML BLOCK 
+// CHANGE THE DYNAMIC CREATION OF ELEMENTS TO HTML BLOCK. Then can add onclick functionalty
 // TODO - mark as done based on state rather than eventlistener
 
 const form = document.querySelector('form');
@@ -25,7 +25,8 @@ const pushTask = (text) => {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const text = document.querySelector('.todoInput').value;text.trim();
+  const text = document.querySelector('.todoInput').value;
+  text.trim();
   text === '' ? alert('Please enter a task') : pushTask(text);
 });
 
