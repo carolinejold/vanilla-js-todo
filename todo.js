@@ -6,58 +6,62 @@ let state = {
   tasks: [],
 };
 
+// Dynamic HTML template for new tasks
+const template = task => `<div
+  class="todo-list-task ${task.complete && 'todo-list-task__done'}"
+    id="${task.id}" 
+    onclick="markComplete(${task.id})">
+    <p>${task.task}</p>
+    ${removeButton(task)}
+  </div>`;
+
+
+// Render the template to the DOM
 const render = (htmlString, el) => {
   el.innerHTML += htmlString;
 };
 
-
-const addRemoveButton = (task) => {
+// Create + add remove button
+const removeButton = task => {
   if (task.complete) {
     return `<div><button type="button"
-    class="button todo__list__item__remove__btn" 
-    onclick="removeTask(${task.id})">Remove</button></div>`;
+    class="remove-button" 
+    onclick="removeTask(${task.id})">X</button></div>`;
   }
   return '';
 };
 
-const template = (task) => `<div
-  class="todo-list__item ${task.complete && 'todo-list__item done'}"
-    id="${task.id}" 
-    onclick="markAsDone(${task.id})">
-    <p>${task.task}</p>
-    ${addRemoveButton(task)}
-  </div>`;
 
+// Submit form
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const newTask = {
+  const task = {
     task: taskInput.value,
     id: Date.now(),
     complete: false,
   };
 
-  state.tasks = [...state.tasks, newTask];
+  state.tasks = [...state.tasks, task];
   render(template(state.tasks[state.tasks.length - 1]), todoList);
   taskInput.value = '';
 });
 
-const loadTasks = () => {
-  state.tasks.map(el => render(template(el), todoList));
-};
 
-const markAsDone = (id) => {
+// Mark task as complete
+const markComplete = (id) => {
   const i = state.tasks.findIndex((item) => item.id === id);
   if (i !== -1) {
     state.tasks[i].complete = true;
     todoList.innerHTML = '';
-    loadTasks();
+    state.tasks.map(el => render(template(el), todoList));
   }
 };
 
+// Remove task
 const removeTask = (id) => {
   const index = state.tasks.findIndex((item) => item.id === id);
   state.tasks.splice(index, 1);
   todoList.innerHTML = '';
-  loadTasks();
+  state.tasks.map(el => render(template(el), todoList));
 };

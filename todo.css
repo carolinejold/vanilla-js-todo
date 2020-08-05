@@ -1,109 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
-/* body {
-	margin: 3rem 2rem;
-	font-size: 1.1rem;
-}
+	body {
+		font-family: 'Roboto', sans-serif;
+		margin: 3em 10em 10em 10em;
+	}
 
-.button {
-	border: none;
-	font-family: inherit;
-	font-size: 1em;
-	font-weight: 100;
-	padding: 0.1rem 0.3rem;
-	border-radius: 1rem;
-	cursor: pointer;
-}
+	.todo {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border: solid 1px hotpink;
+		padding: 3em 1em 3em 1em;
+		
+	}
 
-.todo {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	margin: auto;
-	max-width: 800px;
-}
+	h1 {
+		font-weight: 300;
+		max-width: 300px;
+		text-align: center;
+	}
 
-.todo__header {
-	background-color: #ffa2a6;
-	border-radius: 1rem;
-	padding: 0rem 1rem;
-}
 
-.todo__header__title {
-	background-color: white;
-	border-radius: 1rem;
-	display: inline-block;
-	position: relative;
-	top: -0.8rem;
-	border: #ffa2a6 solid 1px;
-	margin: 0.1rem 0.1rem 1.5rem 0.1rem;
-	padding: 0.1rem 0.3rem;
-}
+	label {
+		font-weight: lighter;
+	}
 
-.todo__header__form {
-	display: flex;
-	flex-direction: column;
-}
+	button {
+		border: none;
+		font-family: inherit;
+		cursor: pointer;
+	}
+	.task-input {
+		padding: 0.5em 0.5em 0.5em 0.5em;
+	}
 
-.todo__header__form__item {
-	margin-bottom: 1rem;
-	font-family: 'Times New Roman', Times, serif;
-	font-size: 1rem;
-}
+	input[type=text], textarea {
+		-webkit-transition: all 0.20s ease-in-out;
+		-moz-transition: all 0.20s ease-in-out;
+		-ms-transition: all 0.20s ease-in-out;
+		-o-transition: all 0.20s ease-in-out;
+		outline: none;
+		border: 1px solid #DDDDDD;
+	}
+	
+	input[type=text]:focus, textarea:focus {
+		box-shadow: 0 0 1px hotpink;
+		border: 1px solid hotpink;
+	}
 
-.todo__header__form__add {
-	align-self: flex-end;
-	color: white;
-	background-color: black;
-}
+	.submit {
+		border: none;
+		font-family: inherit;
+		cursor: pointer;
+		background-color: white;
+		border: solid 1px hotpink;
+		font-size: 0.9em;
+		font-weight: lighter;
+		color: hotpink;
+		padding: 0.4em;
+		border-radius: 5%;
+		
+	}
 
-.todo__header__form__add:hover {
-	background-color: white;
-	color: black;
-}
+	.todo {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		margin: auto;
+		max-width: 800px;
+	}
 
-.todo__list {
-	display: flex;
-	flex-direction: column;
-}
+	.todo-list {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		/* border: solid 1px rgb(175, 175, 175); */
+		margin: 2em 1em 0em 1em;
+		padding: 0em 1em 1em 1em;
+		max-height: 300px;
+		overflow-y: scroll;
+	}
 
-.todo__list__item {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	background-color: #c2f2e3;
-	border-radius: 1rem;
-	margin-top: 0.5rem;
-	padding: 2rem 0rem 2rem 1.2rem;
-}
+	::-webkit-scrollbar {
+		-webkit-appearance: none;
+		width: 7px;
+	}
+	
+	::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background-color: rgba(146, 146, 146, 0.5);
+		box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+	}
 
-.todo__list__item__p {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-}
+	.todo-list-task {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin: 0em 1em 1em 1em;
+		color: hotpink;
+		text-align: center;
+		max-width: 600px;
+		/* border: 1px solid grey; */
+		padding: 0.5em 0.5em 0.5em 0.5em;
+	} 
 
-.todo__list__item__remove {
-	align-self: flex-end;
-	margin-right: 1rem;
-}
+	.remove-button {
+		align-items: center;
+		margin: 0em 0em 0em  0.6em;
+		color: hotpink;
 
-.todo__list__item--done {
-	order: 1;
-	background-color: #f2f2f2;
-	color: #939393;
-	text-decoration: line-through;
-	font-style: italic;
-}
+	}
 
-.todo__list__item__remove__btn {
-	color: white;
-	background-color: #dd0b3a;
-}
-
-.todo__list__item__remove__btn:hover {
-	background-color: #990d2b;
-} */
+	.todo-list-task__done {
+		order: 1;
+		text-decoration: line-through;
+		color: black;
+	}
