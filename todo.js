@@ -1,5 +1,14 @@
+// CHANGE THE DYNAMIC CREATION OF ELEMENTS TO HTML BLOCK 
+// TODO - mark as done based on state rather than eventlistener
+
+const form = document.querySelector('form');
+const list = document.querySelector('.list-container');
+const listItem = document.querySelector('.list-item__card');
+const input = document.querySelector('.todoInput');
+
 let state = {
-  tasks: [],
+  tasks: [
+  ],
 }
 
 const pushTask = (text) => {
@@ -9,30 +18,51 @@ const pushTask = (text) => {
     id: Date.now() // fix this
   }
   state.tasks.push(task);
+  console.log(state.tasks);
   window.dispatchEvent(new Event('statechange'));
 }
 
-const form = document.querySelector('form');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const text = document.querySelector('.todoInput').value.trim();
+  const text = document.querySelector('.todoInput').value;text.trim();
   text === '' ? alert('Please enter a task') : pushTask(text);
 });
 
 
-const list = document.querySelector('.list-container');
-
 const htmlString = state => {
   state.tasks.map(el => {
+    const section = document.createElement('section');
+    section.className = 'list-item__card';
+    section.id = el.id;
+    // section.onclick = markAsDone(section.id);
     const li = document.createElement('li');
-    li.className = 'list-item';
+    li.className = 'list-item__text';
     li.appendChild(document.createTextNode(el.text));
-    list.appendChild(li);
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = 'checkbox'
+    const label = document.createElement('label');
+    label.htmlFor = 'checkbox';
+    section.appendChild(checkbox);
+    section.appendChild(label);
+    section.appendChild(li);
+    list.appendChild(section);
   })
 }
+
+// const markAsDone = (sectionId) => {
+//     // the state.tasks.completed of the state.tasks.stateID = true
+// }
+if (typeof(listItem) != 'undefined' && listItem != null) {
+  listItem.addEventListener('click', () => {
+    listItem.classList.add = 'complete';
+  })
+}
+
 
 window.addEventListener('statechange', () => {
   list.innerHTML = '';
   htmlString(state);
 })
+
