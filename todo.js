@@ -1,69 +1,63 @@
-// CHANGE THE DYNAMIC CREATION OF ELEMENTS TO HTML BLOCK. Then can add onclick functionalty
-// TODO - mark as done based on state rather than eventlistener
-
-const form = document.querySelector('form');
-const list = document.querySelector('.list-container');
-const listItem = document.querySelector('.list-item__card');
-const input = document.querySelector('.todoInput');
+const form = document.querySelector('.form');
+const taskInput = document.querySelector('.task-input');
+const todoList = document.querySelector('.todo-list');
 
 let state = {
-  tasks: [
-  ],
-}
+  tasks: [],
+};
 
-const pushTask = (text) => {
-  const task = {
-    text,
-    completed: false,
-    id: Date.now() // fix this
+const render = (htmlString, el) => {
+  el.innerHTML += htmlString;
+};
+
+
+const addRemoveButton = (task) => {
+  if (task.complete) {
+    return `<div><button type="button"
+    class="button todo__list__item__remove__btn" 
+    onclick="removeTask(${task.id})">Remove</button></div>`;
   }
-  state.tasks.push(task);
-  console.log(state.tasks);
-  window.dispatchEvent(new Event('statechange'));
-}
+  return '';
+};
 
+const template = (task) => `<div
+  class="todo-list__item ${task.complete && 'todo-list__item done'}"
+    id="${task.id}" 
+    onclick="markAsDone(${task.id})">
+    <p>${task.task}</p>
+    ${addRemoveButton(task)}
+  </div>`;
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const text = document.querySelector('.todoInput').value;
-  text.trim();
-  text === '' ? alert('Please enter a task') : pushTask(text);
+
+  const newTask = {
+    task: taskInput.value,
+    id: Date.now(),
+    complete: false,
+  };
+
+  state.tasks = [...state.tasks, newTask];
+  render(template(state.tasks[state.tasks.length - 1]), todoList);
+  taskInput.value = '';
 });
 
+const loadTasks = () => {
+  state.tasks.map(el => render(template(el), todoList));
+};
 
-const htmlString = state => {
-  state.tasks.map(el => {
-    const section = document.createElement('section');
-    section.className = 'list-item__card';
-    section.id = el.id;
-    // section.onclick = markAsDone(section.id);
-    const li = document.createElement('li');
-    li.className = 'list-item__text';
-    li.appendChild(document.createTextNode(el.text));
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.id = 'checkbox'
-    const label = document.createElement('label');
-    label.htmlFor = 'checkbox';
-    section.appendChild(checkbox);
-    section.appendChild(label);
-    section.appendChild(li);
-    list.appendChild(section);
-  })
-}
+const markAsDone = (id) => {
+  const i = state.tasks.findIndex((item) => item.id === id);
+  if (i !== -1) {
+    state.tasks[i].complete = true;
+    todoList.innerHTML = '';
+    loadTasks();
+  }
+};
 
-// const markAsDone = (sectionId) => {
-//     // the state.tasks.completed of the state.tasks.stateID = true
-// }
-if (typeof(listItem) != 'undefined' && listItem != null) {
-  listItem.addEventListener('click', () => {
-    listItem.classList.add = 'complete';
-  })
-}
-
-
-window.addEventListener('statechange', () => {
-  list.innerHTML = '';
-  htmlString(state);
-})
-
+const removeTask = (id) => {
+  const index = state.tasks.findIndex((item) => item.id === id);
+  state.tasks.splice(index, 1);
+  todoList.innerHTML = '';
+  loadTasks();
+};

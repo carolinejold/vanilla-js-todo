@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla JS Todo App</title>
+    <link rel="stylesheet" type="text/css" href="./todo.css" />
+    <script defer src="./todo.js"></script>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="todo.css">
-    <title>Vanilla JS Todo List</title>
-</head>
-
-<body>
-    <h1>Vanilla JS Todo List</h1>
-    <form>
-        <label for="todoInput">What do you need to do?</label><br>
-        <input type="text" class="todoInput" name="todoInput"><br>
-        <button class="submit" type="submit">Add task</button>
-    </form>
-    <ul class="list-container">
-
-    </ul>
-    <script src="todo.js"></script>
-</body>
-
+  <body>
+    <div class="todo">
+      <div class="todo-header">
+        <h3 class="todo-header__title">Add New Todo</h3>
+        <form class="form">
+          <label for="task-input">Task</label>
+          <input
+            class="task-input"
+            id="task-input"
+            type="text"
+            required
+          />
+          <input
+            class="submti"
+            type="submit"
+            value="Add"
+          />
+        </form>
+      </div>
+      <div class="todo-list">
+        <!-- dynamically rendered list items go here -->
+      </div>
+    </div>
+  </body>
 </html>
