@@ -24,9 +24,15 @@ const render = (htmlString, el) => {
 // Create + add remove button
 const removeButton = task => {
   if (task.complete) {
-    return `<div><button type="button"
-    class="remove-button" 
-    onclick="removeTask(${task.id})">X</button></div>`;
+    return `
+      <div>
+        <button
+          type="button"
+          class="remove-button" 
+          onclick="removeTask(${task.id})">
+          X
+        </button>
+    </div>`;
   }
   return '';
 };
@@ -34,14 +40,12 @@ const removeButton = task => {
 
 // Submit form
 form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
+  e.preventDefault()
   const task = {
     task: taskInput.value,
     id: Date.now(),
     complete: false,
   };
-
   state.tasks = [...state.tasks, task];
   render(template(state.tasks[state.tasks.length - 1]), todoList);
   taskInput.value = '';
