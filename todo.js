@@ -42,8 +42,8 @@ const removeButton = task => {
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   const task = {
-    task: taskInput.value,
     id: Date.now(),
+    task: taskInput.value,
     complete: false,
   };
   state.tasks = [...state.tasks, task];
